@@ -30,6 +30,12 @@ from typing import Optional, Any
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
+
+
+import anki.sched
+import anki.schedv2
+from anki.schedv2 import Scheduler
+
 from aqt import mw
 from aqt.overview import Overview, OverviewContent, OverviewBottomBar
 from aqt.toolbar import Toolbar, BottomBar
@@ -47,6 +53,7 @@ from aqt.utils import showInfo
 
 from copy import deepcopy
 from .config import *
+
 
 
 Scheduler = None
@@ -577,6 +584,5 @@ def updateRenderingDeckOverview():
     Overview._renderBottom = wrap(
         Overview._renderBottom, renderDeckBottom, "around")
 
-    if Scheduler is not None:
-        Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
-        Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")
+    Scheduler._nextDueMsg = wrap(Scheduler._nextDueMsg, nextDueMsg, "around")
+    Scheduler.finishedMsg = wrap(Scheduler.finishedMsg, finishedMsg, "around")

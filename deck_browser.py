@@ -28,6 +28,9 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
+
+import anki.sched, anki.schedv2
+
 from anki.lang import _, ngettext
 from aqt import mw
 from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar , RenderDeckNodeContext
