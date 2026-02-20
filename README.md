@@ -46,7 +46,7 @@ Das erstellt:
 Optional eigener Name/Pfad:
 
 ```bash
-python tools/build_addon_package.py -o dist/mein-addon.ankiaddon
+python tools/build_addon_package.py -o dist/mein-addon.zip
 ```
 
 Danach in Anki über **Tools → Add-ons → Install from file...** importieren.
