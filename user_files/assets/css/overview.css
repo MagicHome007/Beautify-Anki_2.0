@@ -14,11 +14,14 @@ body.nightMode {
 }
 
 h1{
-  font-size:5rem ;
+  font-size: clamp(2rem, 5vw, 3.2rem);
   color: #fff;
-  font-family: fantasy;
-  font-variant: petite-caps;
-  word-break: break-word
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-variant: normal;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  word-break: break-word;
 }
 
 
@@ -39,7 +42,7 @@ h1{
 
 /* large numbers in widgets */
 .number{
-  font-size:2.3vw
+  font-size: clamp(1.6rem, 2.1vw, 2.2rem);
 }
 
 .w-icon{
