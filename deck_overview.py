@@ -30,9 +30,12 @@ from typing import Optional, Any
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
+
+
 import anki.sched
 import anki.schedv2
 from anki.schedv2 import Scheduler
+
 from aqt import mw
 from aqt.overview import Overview, OverviewContent, OverviewBottomBar
 from aqt.toolbar import Toolbar, BottomBar
@@ -50,6 +53,18 @@ from aqt.utils import showInfo
 
 from copy import deepcopy
 from .config import *
+
+
+
+Scheduler = None
+for _scheduler_module in ("anki.scheduler.v3", "anki.scheduler", "anki.schedv2"):
+    try:
+        _module = __import__(_scheduler_module, fromlist=["Scheduler"])
+        Scheduler = getattr(_module, "Scheduler", None)
+        if Scheduler is not None:
+            break
+    except Exception:
+        continue
 
 
 def desc(self, deck, _old):
