@@ -1,7 +1,9 @@
 {
   "package": "beautify_anki_2_0",
   "name": "Beautify Anki 2.0",
+
   "mod": 20260220,
+
   "conflicts": [],
   "min_point_version": 49,
   "max_point_version": 99,
