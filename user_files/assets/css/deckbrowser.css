@@ -147,23 +147,3 @@ imageAnimation {  0% {
 td{
   display: inline-block;
 }
-
-.deck-icon {
-  opacity: 0.95;
-}
-
-.deck-level-1 {
-  border-left: 0;
-}
-
-.decktd[class*="deck-level-"] {
-  position: relative;
-}
-
-.deck-level-2,
-.deck-level-3,
-.deck-level-4,
-.deck-level-5,
-.deck-level-6 {
-  border-left: 2px solid rgba(255, 255, 255, 0.2);
-}

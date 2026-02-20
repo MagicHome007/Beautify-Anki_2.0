@@ -28,6 +28,7 @@ Beautify Anki is an [Anki](https://apps.ankiweb.net/) addon that attempts to giv
 Download the latest version from [Ankiweb](https://ankiweb.net/shared/info/1150874988) or select a version manually from [here](https://github.com/fylux/Beautify-Anki/releases)
 
 
+<<<<<<< HEAD
 
 ## 🧰 Lokales Packaging (installierbare Datei)
 
@@ -51,6 +52,8 @@ python tools/build_addon_package.py -o dist/mein-addon.zip
 
 Danach in Anki über **Tools → Add-ons → Install from file...** importieren.
 
+=======
+>>>>>>> parent of 6589287 (Fix addon packaging: generate zip with validated manifest)
 ## ⚠️ Disclaimer
 This is a beta version that has only been tested on Anki 2.1.22. and 2.1.26 It probably conflicts with other addons that do similar things [(check the list of known conflicting addons)](https://beautify-anki.shorouk.dev/before-install). For feature request and bug report please post an a [new issue](https://github.com/fylux/Beautify-Anki/issues) 
 
