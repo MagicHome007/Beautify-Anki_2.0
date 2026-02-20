@@ -28,7 +28,6 @@ Copyright (c) 2020 Shorouk Abdelaziz (https://shorouk.dev)
 
 from anki.errors import DeckRenameError
 from anki.hooks import wrap
-import anki.sched, anki.schedv2
 from anki.lang import _, ngettext
 from aqt import mw
 from aqt.deckbrowser import DeckBrowser , DeckBrowserBottomBar , RenderDeckNodeContext
@@ -87,7 +86,7 @@ def renderStats(self, _old):
 
 
     
-    <div class='row align-items-center full   stats' style="background-color: {BROWSER[overview-wedgit-bg]} ">
+    <div class='row align-items-center full   stats' title='Heute gelernt: Karten, Zeit und Geschwindigkeit' style="background-color: {BROWSER[overview-wedgit-bg]} ">
             <div class="col col-2 ">
                 <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-card-checklist" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -101,28 +100,15 @@ def renderStats(self, _old):
 
     <div class="row align-items-center full">
 
-        <div class='col col-6  stats half left ' style="background-color: {BROWSER[average-wedgit-bg]}">
+        <div class='col col-6  stats half left ' title='Durchschnittliche Lernrate in Karten pro Minute' style="background-color: {BROWSER[average-wedgit-bg]}">
             <div class="row align-items-center">
-                    <div class="col col-4">
-                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-watch" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0 1 14 8a5.985 5.985 0 0 1-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0z"/>
-                        <path d="M13.918 8.993A.502.502 0 0 0 14.5 8.5v-1a.5.5 0 0 0-.582-.493 6.044 6.044 0 0 1 0 1.986z"/>
-                        <path fill-rule="evenodd" d="M8 4.5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H6a.5.5 0 0 1 0-1h1.5V5a.5.5 0 0 1 .5-.5z"/>
-                        </svg>
-                    </div>
-
-                    <div class="col col-8">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
+                    <div class="col col-12">{LOCALS[Average]}: {speed:.2f} <br> {LOCALS[cards/minute]} </div>
             </div>   
         </div>
 
-        <div class='col col-6  stats half right ' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
+        <div class='col col-6  stats half right ' title='Geschätzte verbleibende Lernzeit für heute' style="background-color:  {BROWSER[remaining-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-4">
-                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-stopwatch-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M5.5.5A.5.5 0 0 1 6 0h4a.5.5 0 0 1 0 1H9v1.07A7.002 7.002 0 0 1 8 16 7 7 0 0 1 7 2.07V1H6a.5.5 0 0 1-.5-.5zm3 4.5a.5.5 0 0 0-1 0v3.5h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5z"/>
-                    </svg>
-                </div>
-                <div class="col col-8">
+                <div class="col col-12">
                 {} {LOCALS[more]}
                 </div>
              </div>
@@ -133,16 +119,10 @@ def renderStats(self, _old):
 
     <div class="row align-items-center full">
 
-        <div class='col col-6  stats  half left' style="background-color:{BROWSER[new-wedgit-bg]}">
+        <div class='col col-6  stats  half left' title='Anzahl neuer Karten im Deck-Browser' style="background-color:{BROWSER[new-wedgit-bg]}">
 
         <div class="row align-items-center">
-        <div class="col col-4">
-            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-layers-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M7.765 1.559a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .882l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.882l7.5-4z"/>
-            <path fill-rule="evenodd" d="M2.125 8.567l-1.86.992a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0l.418-.785-.419.785-5.169-2.756z"/>
-            </svg>
-             </div>
-              <div class="col col-8">
+              <div class="col col-12">
             {new_count} <br>   {LOCALS[New]}
             </div>
         </div>
@@ -150,17 +130,9 @@ def renderStats(self, _old):
 
 
 
-        <div class='col col-6  stats  half right'style="background-color: {BROWSER[due-wedgit-bg]}">
+        <div class='col col-6  stats  half right' title='Fällige Karten nach Typ: Due, Learn und Review' style="background-color: {BROWSER[due-wedgit-bg]}">
             <div class="row align-items-center">
-                <div class="col col-4">
-                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                    </svg>
-
-                </div>
-
-                <div class="col col-8">
+                <div class="col col-12">
                 {due_count}  &nbsp;  {LOCALS[Due]}    <br>
                 {learn_count} &nbsp;  {LOCALS[Learn]} <br> 
                 {review_count}  &nbsp;   {LOCALS[Review]}  
@@ -186,7 +158,7 @@ def renderStats(self, _old):
 
 
 
-    <div class='row align-items-center full stats'  style="background-color:{BROWSER[total-wedgit-bg]} ">
+    <div class='row align-items-center full stats' title='Gesamtzahl aller heute anstehenden Karten' style="background-color:{BROWSER[total-wedgit-bg]} ">
               <div class="col col-2">
              
                         <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-pie-chart-fill" fill="{BROWSER[wedgits-font-color]}" xmlns="http://www.w3.org/2000/svg">
@@ -234,8 +206,8 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
 
     due = node.review_count + node.learn_count
 
-    def indent():
-        return "&nbsp;" * 6 * (node.level - 1)
+    def indent_px():
+        return max(0, (node.level - 1) * 18)
 
     if node.deck_id == ctx.current_deck_id:
         klass = "deck current"
@@ -251,24 +223,33 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
         )
     else:
         collapse = "<span class=collapseable></span>"
+
     if node.filtered:
         extraclass = "filtered"
     else:
         extraclass = ""
-    buf += """<td class="col col-1" style="padding-left:15px;">
-          <img src="%s/user_files/assets/deck_icons/%s.png" onerror="this.src='%s/user_files/assets/deck_icons/default.png'" alt="" class="circle"></td>
 
-    <td  class='col col-8 decktd ' >%s%s<a class="align-middle deck padding %s"
+    if node.level == 1:
+        buf += """<td class="col col-1 deck-icon" style="padding-left:15px;">
+          <img src="%s/user_files/assets/deck_icons/%s.png" onerror="this.src='%s/user_files/assets/deck_icons/default.png'" alt="" class="circle"></td>""" % (
+            base,
+            node.name,
+            base,
+        )
+    else:
+        buf += "<td class='col col-1 deck-icon'></td>"
+
+    buf += """
+    <td  class='col col-8 decktd deck-level-%d' style='padding-left:%dpx;'>%s<a class="align-middle deck padding %s"
     href=# onclick="return pycmd('open:%d')">%s</a></td>""" % (
-        base,
-        node.name,
-        base,
-        indent(),
+        node.level,
+        indent_px(),
         collapse,
         extraclass,
         node.deck_id,
         node.name,
     )
+
     # due counts
     def nonzeroColour(cnt, klass):
         if not cnt:
@@ -279,21 +260,24 @@ def render_deck_node(self, node: DeckTreeNode, ctx: RenderDeckNodeContext,_old) 
         nonzeroColour(due, "count review-count"),
         nonzeroColour(node.new_count, "count new-count"),
     )
+
     # options
     buf += (
         "<td  class='opts col col-1'><a onclick='return pycmd(\"opts:%d\");'>".format(THEME=THEME) % node.deck_id
     )
-    buf+= """
+    buf += """
     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear-fill" fill="{THEME[gear-icon-color]}" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 0 0-5.86 2.929 2.929 0 0 0 0 5.858z"/>
     </svg>
     </a></td></tr>
     """.format(THEME=THEME)
+
     # children
     if not node.collapsed:
         for child in node.children:
             buf += self._render_deck_node(child, ctx)
     return buf
+
 
 
 sharedIcon = """
