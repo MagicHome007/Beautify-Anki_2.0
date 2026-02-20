@@ -42,7 +42,9 @@ python tools/build_addon_package.py
 
 Das erstellt:
 
-- `dist/Beautify-Anki_2.0.ankiaddon`
+
+- `dist/Beautify-Anki_2.0-addon.zip`
+
 
 Optional eigener Name/Pfad:
 
